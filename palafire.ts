@@ -1,26 +1,19 @@
 import * as admin from 'firebase-admin';
-import { firestore } from '../utils/firebase_opcionales';
-import { IMisTransacciones } from '@interfaces/IMis_transacciones';
-import { IWallets } from '@interfaces/IWallets';
-import { IProyecto } from '@interfaces/IProyecto';
-import { IUser, IDatosPublico, IUserRegistro,IMisLikeProyectos } from '@interfaces/IUser';
-import { IMisCriptoacciones } from '@interfaces/IMis_criptoacciones';
-import { IRetiroSolicitud } from '@interfaces/retiro_solicitud';
-import { ICriptoaccionesEnVenta } from '@interfaces/IMercado';
-import { db } from '@interfaces/IColecciones';
-import { IMisReferidos } from '@interfaces/IMi_referido';
 
+const firestore =  admin.firestore()
 const FieldValue = admin.firestore.FieldValue;
 const increment = FieldValue.increment(1);
 const decrement = FieldValue.increment(-1);
+let coleccion:string[] = ['']
+let subcoleccion:string[] = [''];
 
 
-const obtenerDatosDocumento = async(num:number,documento:string):Promise<IUser|IProyecto|IWallets|void>=> {
+const obtenerDatosDocumento = async(num:number,documento:string):Promise<any>=> {
     try{
         let doc = await firestore
-        .collection(`${db.coleccion[num]}`)
+        .collection(`${coleccion[num]}`)
         .doc(`${documento}`).get();
-        let data = doc.data() as IUser;
+        let data = doc.data() as any;
         return data
     } 
     catch(err) { 
@@ -29,15 +22,15 @@ const obtenerDatosDocumento = async(num:number,documento:string):Promise<IUser|I
 };
 
 /*      OBTENER UNA COLECCION   */
-const obtenerDatosSubColeccion = async(num:number,documento:string,num2:number):Promise<IMisCriptoacciones[]|IMisTransacciones[]|any> => {
+const obtenerDatosSubColeccion = async(num:number,documento:string,num2:number):Promise<any> => {
     try{
-        let datos_coleccion:IMisCriptoacciones[]|IMisTransacciones[] = []
+        let datos_coleccion:[][] = []
         let collection = await firestore
-        .collection(`${db.coleccion[num]}`)
+        .collection(`${coleccion[num]}`)
         .doc(`${documento}`)
-        .collection(`${db.subcoleccion[num2]}`).get();
+        .collection(`${subcoleccion[num2]}`).get();
         collection.forEach(doc => {
-            let data =  doc.data() as IMisCriptoacciones & IMisTransacciones;
+            let data =  doc.data() as any;
             datos_coleccion.push(data);
         });  
         return datos_coleccion 
@@ -48,10 +41,10 @@ const obtenerDatosSubColeccion = async(num:number,documento:string,num2:number):
 };
 
 
-const agregarDocumento = async(num:number,documento:IUser|IUserRegistro|IRetiroSolicitud|ICriptoaccionesEnVenta):Promise<any|void> => {
+const agregarDocumento = async(num:number,documento:any):Promise<any> => {
     try{
         let agregado = await firestore
-        .collection(`${db.coleccion[num]}`)
+        .collection(`${coleccion[num]}`)
         .add(documento)
         return agregado;
     } catch(err) {
@@ -60,12 +53,12 @@ const agregarDocumento = async(num:number,documento:IUser|IUserRegistro|IRetiroS
 }
 
 
-const agregarSubDocumento = async(num:number,documento:string|undefined,num2:number,subdocumento:IMisReferidos|IMisCriptoacciones|IMisTransacciones):Promise<any> => {
+const agregarSubDocumento = async(num:number,documento:string,num2:number,subdocumento:any):Promise<any> => {
     try{
         let agregado = await firestore
-        .collection(`${db.coleccion[num]}`)
+        .collection(`${coleccion[num]}`)
         .doc(`${documento}`)
-        .collection(`${db.subcoleccion[num2]}`)
+        .collection(`${subcoleccion[num2]}`)
         .add(subdocumento);
         return agregado;
     } catch(err) {
@@ -73,10 +66,10 @@ const agregarSubDocumento = async(num:number,documento:string|undefined,num2:num
     }
 }
 
-const CrearDocumento = async(num:number,documento:string,campos:IUser):Promise<any> => {
+const CrearDocumento = async(num:number,documento:string,campos:any):Promise<any> => {
     try{
         let agregado = await firestore
-        .collection(`${db.coleccion[num]}`)
+        .collection(`${coleccion[num]}`)
         .doc(`${documento}`)
         .set(campos);
         return agregado;
@@ -85,12 +78,12 @@ const CrearDocumento = async(num:number,documento:string,campos:IUser):Promise<a
     }
 }
 
-const CrearSubDocumento = async(num:number,documento:string,num2:number,subdocumento:string,documentocreado:IDatosPublico|IUserRegistro|IMisCriptoacciones|IMisTransacciones|IMisLikeProyectos):Promise<any> => {
+const CrearSubDocumento = async(num:number,documento:string,num2:number,subdocumento:string,documentocreado:any):Promise<any> => {
     try{
         let agregado = await firestore
-        .collection(`${db.coleccion[num]}`)
+        .collection(`${coleccion[num]}`)
         .doc(`${documento}`)
-        .collection(`${db.subcoleccion[num2]}`)
+        .collection(`${subcoleccion[num2]}`)
         .doc(`${subdocumento}`)
         .set(documentocreado);
         return agregado;
@@ -100,10 +93,10 @@ const CrearSubDocumento = async(num:number,documento:string,num2:number,subdocum
 }
 
 
-const actualizarDocumento = async(num:number,documento:string|undefined,actualizar:IUser|IProyecto|IWallets|IMisLikeProyectos|IDatosPublico):Promise<IUser|IProyecto|IWallets|void> => { 
+const actualizarDocumento = async(num:number,documento:string,actualizar:any):Promise<any> => { 
     try{
         await firestore
-        .collection(`${db.coleccion[num]}`)
+        .collection(`${coleccion[num]}`)
         .doc(`${documento}`)
         .update(actualizar);
         console.log('actualizado!')
@@ -112,11 +105,11 @@ const actualizarDocumento = async(num:number,documento:string|undefined,actualiz
     }
 }
 
-const actualizarSubDocumento = async(num:number,documento:string,num2:number,subdocumento:string,actualizar:IUser|IProyecto):Promise<IUser|IProyecto|void> => { 
+const actualizarSubDocumento = async(num:number,documento:string,num2:number,subdocumento:string,actualizar:any):Promise<void> => { 
     try{
-        await firestore.collection(`${db.coleccion[num]}`)
+        await firestore.collection(`${coleccion[num]}`)
         .doc(`${documento}`)
-        .collection(`${ db.subcoleccion[num2] }`)
+        .collection(`${ subcoleccion[num2] }`)
         .doc(`${subdocumento}`)
         .update(actualizar);
         console.log('actualizado!')
@@ -127,7 +120,7 @@ const actualizarSubDocumento = async(num:number,documento:string,num2:number,sub
 
 const eliminarDocumento = async (num:number,uid:string) => {
     try {
-        await firestore.doc(`${db.coleccion[num]}/${uid}`).delete();
+        await firestore.doc(`${coleccion[num]}/${uid}`).delete();
     }   
 
     catch(err) { 
@@ -141,7 +134,7 @@ const eliminarDocumento = async (num:number,uid:string) => {
         try{
         
             firestore
-            .collection(`${db.coleccion[num]}`)
+            .collection(`${coleccion[num]}`)
             .doc(`${uid_proyecto}`)
             .update({ 
                 me_gusta_total: increment,
@@ -159,7 +152,7 @@ const noMeGustaDecrementar = async (num:number,uid_proyecto:string,user_uid:stri
     try{
     
         firestore
-        .collection(`${db.coleccion[num]}`)
+        .collection(`${coleccion[num]}`)
         .doc(`${uid_proyecto}`).update({ 
             me_gusta_total: decrement,
             users_likes:FieldValue.arrayRemove(user_uid)

@@ -1,0 +1,2 @@
+#palafire es una manera facil de implementar los metodos de firebase.
+npm install palafire --save

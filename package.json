@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "auto": "git add . && git commit -m \"automatico\" && nano package.json && npm publish"
+    "auto": "git add . && git commit -m \"automatico\" && git push origin master && nano package.json && npm publish"
   },
   "author": "",
   "license": "ISC",

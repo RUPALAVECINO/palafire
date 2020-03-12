@@ -1,15 +1,14 @@
 import * as admin from 'firebase-admin';
-
+const coleccion = (colections:string[]):string[] => colections;
+const subcoleccion = (subcolections:string[]):string[] => subcolections;
 const firestore =  admin.firestore()
 const FieldValue = admin.firestore.FieldValue;
 const increment = FieldValue.increment(1);
 const decrement = FieldValue.increment(-1);
 
-const coleccion = (colections:string[]):string[] => colections;
-const subcoleccion = (subcolections:string[]):string[] => subcolections;
 
 
-const obtenerDatosDocumento = async(num:number,documento:string):Promise<any>=> {
+ const obtenerDatosDocumento = async(num:number,documento:string):Promise<any>=> {
     try{
         let doc = await firestore
         .collection(`${coleccion[num]}`)
@@ -165,18 +164,18 @@ const noMeGustaDecrementar = async (num:number,uid_proyecto:string,user_uid:stri
 }
 
 
-export { 
-    meGustaIncrementar,
-    noMeGustaDecrementar,
-    actualizarDocumento,
-    actualizarSubDocumento,
-    agregarDocumento,
-    agregarSubDocumento, 
-    CrearSubDocumento,
-    CrearDocumento,
-    eliminarDocumento,
-    obtenerDatosDocumento,
-    obtenerDatosSubColeccion,
-    coleccion,
-    subcoleccion
-};
+module.exports = coleccion;
+module.exports = subcoleccion;
+module.exports = meGustaIncrementar;
+module.exports = noMeGustaDecrementar;
+module.exports = actualizarDocumento;
+module.exports = actualizarSubDocumento;
+module.exports = agregarDocumento;
+module.exports = agregarSubDocumento; 
+module.exports = CrearSubDocumento;
+module.exports = CrearDocumento;
+module.exports = eliminarDocumento;
+module.exports = obtenerDatosDocumento;
+module.exports = obtenerDatosSubColeccion;
+module.exports = coleccion;
+module.exports = subcoleccion;

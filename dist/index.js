@@ -35,16 +35,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var admin = require("firebase-admin");
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var admin = __importStar(require("firebase-admin"));
 var firestore = admin.firestore();
 var FieldValue = admin.firestore.FieldValue;
 var increment = FieldValue.increment(1);
 var decrement = FieldValue.increment(-1);
-var cole = [''];
-var subcole = [''];
-var coleccion = function (colections) { return cole = colections; };
-var subcoleccion = function (subcolections) { return subcole = subcolections; };
+var fire;
+var getDb = function (db) { return fire = db; };
 var obtenerDatosDocumento = function (num, documento) { return __awaiter(void 0, void 0, void 0, function () {
     var doc, data, err_1;
     return __generator(this, function (_a) {
@@ -52,7 +57,7 @@ var obtenerDatosDocumento = function (num, documento) { return __awaiter(void 0,
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, firestore
-                        .collection("" + cole[num])
+                        .collection("" + fire.coleccion[num])
                         .doc("" + documento).get()];
             case 1:
                 doc = _a.sent();
@@ -66,7 +71,7 @@ var obtenerDatosDocumento = function (num, documento) { return __awaiter(void 0,
         }
     });
 }); };
-/*      OBTENER UNA cole   */
+/*      OBTENER UNA fire.coleccion   */
 var obtenerDatosSubcole = function (num, documento, num2) { return __awaiter(void 0, void 0, void 0, function () {
     var datos_cole_1, collection, err_2;
     return __generator(this, function (_a) {
@@ -75,9 +80,9 @@ var obtenerDatosSubcole = function (num, documento, num2) { return __awaiter(voi
                 _a.trys.push([0, 2, , 3]);
                 datos_cole_1 = [];
                 return [4 /*yield*/, firestore
-                        .collection("" + cole[num])
+                        .collection("" + fire.coleccion[num])
                         .doc("" + documento)
-                        .collection("" + subcole[num2]).get()];
+                        .collection("" + fire.subcoleccion[num2]).get()];
             case 1:
                 collection = _a.sent();
                 collection.forEach(function (doc) {
@@ -100,7 +105,7 @@ var agregarDocumento = function (num, documento) { return __awaiter(void 0, void
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, firestore
-                        .collection("" + cole[num])
+                        .collection("" + fire.coleccion[num])
                         .add(documento)];
             case 1:
                 agregado = _a.sent();
@@ -120,9 +125,9 @@ var agregarSubDocumento = function (num, documento, num2, subdocumento) { return
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, firestore
-                        .collection("" + cole[num])
+                        .collection("" + fire.coleccion[num])
                         .doc("" + documento)
-                        .collection("" + subcole[num2])
+                        .collection("" + fire.subcoleccion[num2])
                         .add(subdocumento)];
             case 1:
                 agregado = _a.sent();
@@ -142,7 +147,7 @@ var CrearDocumento = function (num, documento, campos) { return __awaiter(void 0
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, firestore
-                        .collection("" + cole[num])
+                        .collection("" + fire.coleccion[num])
                         .doc("" + documento)
                         .set(campos)];
             case 1:
@@ -163,9 +168,9 @@ var CrearSubDocumento = function (num, documento, num2, subdocumento, documentoc
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, firestore
-                        .collection("" + cole[num])
+                        .collection("" + fire.coleccion[num])
                         .doc("" + documento)
-                        .collection("" + subcole[num2])
+                        .collection("" + fire.subcoleccion[num2])
                         .doc("" + subdocumento)
                         .set(documentocreado)];
             case 1:
@@ -186,7 +191,7 @@ var actualizarDocumento = function (num, documento, actualizar) { return __await
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, firestore
-                        .collection("" + cole[num])
+                        .collection("" + fire.coleccion[num])
                         .doc("" + documento)
                         .update(actualizar)];
             case 1:
@@ -207,9 +212,9 @@ var actualizarSubDocumento = function (num, documento, num2, subdocumento, actua
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, firestore.collection("" + cole[num])
+                return [4 /*yield*/, firestore.collection("" + fire.coleccion[num])
                         .doc("" + documento)
-                        .collection("" + subcole[num2])
+                        .collection("" + fire.subcoleccion[num2])
                         .doc("" + subdocumento)
                         .update(actualizar)];
             case 1:
@@ -230,7 +235,7 @@ var eliminarDocumento = function (num, uid) { return __awaiter(void 0, void 0, v
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, firestore.doc(cole[num] + "/" + uid)["delete"]()];
+                return [4 /*yield*/, firestore.doc(fire.coleccion[num] + "/" + uid).delete()];
             case 1:
                 _a.sent();
                 return [3 /*break*/, 3];
@@ -247,7 +252,7 @@ var meGustaIncrementar = function (num, uid_proyecto, user_uid) { return __await
     return __generator(this, function (_a) {
         try {
             firestore
-                .collection("" + cole[num])
+                .collection("" + fire.coleccion[num])
                 .doc("" + uid_proyecto)
                 .update({
                 me_gusta_total: increment,
@@ -265,7 +270,7 @@ var noMeGustaDecrementar = function (num, uid_proyecto, user_uid) { return __awa
     return __generator(this, function (_a) {
         try {
             firestore
-                .collection("" + cole[num])
+                .collection("" + fire.coleccion[num])
                 .doc("" + uid_proyecto).update({
                 me_gusta_total: decrement,
                 users_likes: FieldValue.arrayRemove(user_uid)
@@ -277,8 +282,7 @@ var noMeGustaDecrementar = function (num, uid_proyecto, user_uid) { return __awa
         return [2 /*return*/];
     });
 }); };
-module.exports = cole;
-module.exports = subcole;
+module.exports = getDb;
 module.exports = meGustaIncrementar;
 module.exports = noMeGustaDecrementar;
 module.exports = actualizarDocumento;
@@ -290,5 +294,3 @@ module.exports = CrearDocumento;
 module.exports = eliminarDocumento;
 module.exports = obtenerDatosDocumento;
 module.exports = obtenerDatosSubcole;
-module.exports = cole;
-module.exports = subcole;

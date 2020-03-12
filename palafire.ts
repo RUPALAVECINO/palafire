@@ -4,8 +4,9 @@ const firestore =  admin.firestore()
 const FieldValue = admin.firestore.FieldValue;
 const increment = FieldValue.increment(1);
 const decrement = FieldValue.increment(-1);
-let coleccion:string[] = ['']
-let subcoleccion:string[] = [''];
+
+const coleccion = (colections:string[]):string[] => colections;
+const subcoleccion = (subcolections:string[]):string[] => subcolections;
 
 
 const obtenerDatosDocumento = async(num:number,documento:string):Promise<any>=> {
@@ -176,4 +177,6 @@ export {
     eliminarDocumento,
     obtenerDatosDocumento,
     obtenerDatosSubColeccion,
+    coleccion,
+    subcoleccion
 };

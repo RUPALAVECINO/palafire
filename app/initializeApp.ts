@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 
-export const initializeApp = (serviceAccount: string, databaseURL: string) => {
+const iniciarApp = (serviceAccount: string, databaseURL: string) => {
     if (admin.apps.length === 0) {
       admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
@@ -11,4 +11,4 @@ export const initializeApp = (serviceAccount: string, databaseURL: string) => {
     return true;
   };
   
-  export { initializeApp };
+  export { iniciarApp, admin };

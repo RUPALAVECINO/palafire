@@ -1,13 +1,13 @@
 {
   "name": "palafire",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "dist/index.js",
   "types":"dist/index.d.ts",
   "scripts": {
     "prepublish": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "auto": "git add . && git commit -m \"automatico\" && git push origin master && nano package.json && npm publish"
+    "auto": "git add . && git commit -m \"automatico\" && git push origin master && nano package.json && npm publish "
   },
   "author": "",
   "license": "ISC",

@@ -11,4 +11,4 @@ export const initializeApp = (serviceAccount: string, databaseURL: string) => {
     return true;
   };
   
-  export { admin };
+  export { initializeApp };

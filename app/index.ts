@@ -176,8 +176,26 @@ const noMeGustaDecrementar = async (num:number,uid_proyecto:string,user_uid:stri
     }
 }
 
+const tokenClient = async (token:string):Promise<String> => {
+    let received = await admin.auth().verifyIdToken(token);
+    return received.uid;
+}
 
-export { iniciarApp, admin, getDb, meGustaIncrementar, noMeGustaDecrementar, actualizarDocumento,
-    actualizarSubDocumento, addDoc, agregarSubDocumento, CrearSubDocumento,
-    CrearDocumento, eliminarDocumento, obtenerDatosDocumento, obtenerDatosSubcole
+
+export { 
+    iniciarApp, 
+    admin, 
+    getDb, 
+    meGustaIncrementar, 
+    noMeGustaDecrementar, 
+    actualizarDocumento,
+    actualizarSubDocumento, 
+    addDoc, 
+    agregarSubDocumento, 
+    CrearSubDocumento,
+    CrearDocumento, 
+    eliminarDocumento, 
+    obtenerDatosDocumento, 
+    obtenerDatosSubcole, 
+    tokenClient
 };

@@ -176,7 +176,7 @@ const noMeGustaDecrementar = async (num:number,uid_proyecto:string,user_uid:stri
     }
 }
 
-const tokenClient = async (token:string):Promise<String> => {
+const tokenClient = async (token:string):Promise<string> => {
     let received = await admin.auth().verifyIdToken(token);
     return received.uid;
 }

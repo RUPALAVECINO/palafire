@@ -92,7 +92,7 @@ const obtenerDatosDocumento = async(num:number,documento:string):Promise<any>=> 
      }
  }
 
- const CrearSubDocumento = async(num:number,documento:string,num2:number,subdocumento:string,documentocreado:any):Promise<any> => {
+ const addSubDoc = async(num:number,documento:string,num2:number,subdocumento:string,documentocreado:any):Promise<any> => {
      try{
          let agregado = await firestore()
          .collection(`${fire.coleccion[num]}`)
@@ -194,7 +194,7 @@ export {
     actualizarSubDocumento, 
     addDoc, 
     agregarSubDocumento, 
-    CrearSubDocumento,
+    addSubDoc,
     CrearDocumento, 
     eliminarDocumento, 
     obtenerDatosDocumento, 

@@ -17,6 +17,8 @@ const FieldValue = admin.firestore.FieldValue;
 const increment = FieldValue.increment(1);
 const decrement = FieldValue.increment(-1);
 let fire:IColecciones;
+
+
 const getDb = (db:IColecciones):IColecciones => fire = db;
     
 

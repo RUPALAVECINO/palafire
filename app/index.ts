@@ -17,6 +17,8 @@ const FieldValue = admin.firestore.FieldValue;
 const increment = FieldValue.increment(1);
 const decrement = FieldValue.increment(-1);
 let fire:IColecciones;
+const removeArray= (data:string) => FieldValue.arrayRemove(data);
+const unionArray= (data:string) => FieldValue.arrayUnion(data);
 
 
 const getDb = (db:IColecciones):IColecciones => fire = db;
@@ -199,5 +201,7 @@ export {
     eliminarDocumento, 
     getDoc, 
     obtenerDatosSubcole, 
-    tokenClient
+    tokenClient,
+    removeArray,
+    unionArray
 };

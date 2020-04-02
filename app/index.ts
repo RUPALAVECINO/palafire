@@ -14,11 +14,11 @@ const iniciarApp = (serviceAccount: string, databaseURL: string) => {
   
 const firestore =  admin.firestore;
 const FieldValue = admin.firestore.FieldValue;
-const increment = FieldValue.increment(1);
-const decrement = FieldValue.increment(-1);
 let fire:IColecciones;
 const removeArray= (data:string) => FieldValue.arrayRemove(data);
 const unionArray= (data:string) => FieldValue.arrayUnion(data);
+const decrementPala = (cantidad:number) => FieldValue.increment(-cantidad);
+const incrementPala = (cantidad:number) => FieldValue.increment(cantidad);
 
 
 const getDb = (db:IColecciones):IColecciones => fire = db;
@@ -154,7 +154,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
              .collection(`${fire.coleccion[num]}`)
              .doc(`${uid_proyecto}`)
              .update({ 
-                 me_gusta_total: increment,
+                 me_gusta_total: incrementPala(1),
                  users_likes:FieldValue.arrayUnion(user_uid)
              });
          }
@@ -171,7 +171,7 @@ const noMeGustaDecrementar = async (num:number,uid_proyecto:string,user_uid:stri
         firestore()
         .collection(`${fire.coleccion[num]}`)
         .doc(`${uid_proyecto}`).update({ 
-            me_gusta_total: decrement,
+            me_gusta_total: decrementPala(1),
             users_likes:FieldValue.arrayRemove(user_uid)
         });
     }
@@ -203,5 +203,7 @@ export {
     obtenerDatosSubcole, 
     tokenClient,
     removeArray,
-    unionArray
+    unionArray,
+    incrementPala,
+    decrementPala
 };

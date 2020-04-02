@@ -69,7 +69,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
  }
 
 
- const agregarSubDocumento = async(num:number,documento:string,num2:number,subdocumento:any):Promise<any> => {
+ const addSubDoc = async(num:number,documento:string,num2:number,subdocumento:any):Promise<any> => {
      try{
          let agregado = await firestore()
          .collection(`${fire.coleccion[num]}`)
@@ -82,7 +82,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
      }
  }
 
- const CrearDocumento = async(num:number,documento:string,campos:any):Promise<any> => {
+ const addDocSet = async(num:number,documento:string,campos:any):Promise<any> => {
      try{
          let agregado = await firestore()
          .collection(`${fire.coleccion[num]}`)
@@ -94,7 +94,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
      }
  }
 
- const addSubDoc = async(num:number,documento:string,num2:number,subdocumento:string,documentocreado:any):Promise<any> => {
+ const addSubDocSet = async(num:number,documento:string,num2:number,subdocumento:string,documentocreado:any):Promise<any> => {
      try{
          let agregado = await firestore()
          .collection(`${fire.coleccion[num]}`)
@@ -195,9 +195,9 @@ export {
     actualizarDocumento,
     actualizarSubDocumento, 
     addDoc, 
-    agregarSubDocumento, 
-    addSubDoc,
-    CrearDocumento, 
+    addSubDoc, 
+    addSubDocSet,
+    addDocSet, 
     eliminarDocumento, 
     getDoc, 
     obtenerDatosSubcole, 

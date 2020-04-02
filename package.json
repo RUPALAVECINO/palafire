@@ -1,6 +1,6 @@
 {
   "name": "palafire",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "npm package para facilitar firebase firestore y crear aplicaciones más rapidamente",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

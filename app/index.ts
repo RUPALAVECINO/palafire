@@ -22,7 +22,7 @@ let fire:IColecciones;
 const getDb = (db:IColecciones):IColecciones => fire = db;
     
 
-const obtenerDatosDocumento = async(num:number,documento:string):Promise<any>=> {
+const getDoc = async(num:number,documento:string):Promise<any>=> {
     try {
         let doc = await firestore()
         .collection(`${fire.coleccion[num]}`)
@@ -197,7 +197,7 @@ export {
     addSubDoc,
     CrearDocumento, 
     eliminarDocumento, 
-    obtenerDatosDocumento, 
+    getDoc, 
     obtenerDatosSubcole, 
     tokenClient
 };

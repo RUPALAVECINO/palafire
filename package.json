@@ -1,12 +1,12 @@
 {
   "name": "palafire",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "npm package para facilitar firebase firestore y crear aplicaciones más rapidamente",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "tsc",
-    "auto": "git add . && git commit -m \"automatico\" && git push origin master && nano package.json && npm publish "
+    "auto": "nano package.json && git add . && git commit -m \"automatico\" && git push origin master && npm publish "
   },
   "author": "Paladev",
   "keywords": [

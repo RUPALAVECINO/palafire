@@ -61,7 +61,8 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
      try{
          let agregado = await firestore()
          .collection(`${fire.coleccion[num]}`)
-         .add(documento)
+         .add(documento);
+         console.log(`se agrego ${agregado.id}`);
          return agregado;
      } catch(err) {
          console.error(err)
@@ -76,6 +77,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
          .doc(`${documento}`)
          .collection(`${fire.subcoleccion[num2]}`)
          .add(subdocumento);
+         console.log(`subdocumento agregado: ${agregado.id}`);
          return agregado;
      } catch(err) {
          console.error(err)
@@ -115,7 +117,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
          .collection(`${fire.coleccion[num]}`)
          .doc(`${documento}`)
          .update(actualizar);
-         console.log('actualizado!')
+         console.log('documento - actualizado!')
      } catch(err) {
          console.error(err)
      }
@@ -129,7 +131,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
          .collection(`${ fire.subcoleccion[num2] }`)
          .doc(`${subdocumento}`)
          .update(actualizar);
-         console.log('actualizado!')
+         console.log('subdocumento - actualizado!')
      } catch(err) {
          console.error(err)
      }
@@ -137,7 +139,8 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
 
  const eliminarDocumento = async (num:number,uid:string) => {
      try {
-         await firestore().doc(`${fire.coleccion[num]}/${uid}`).delete();
+        let eliminado = await firestore().doc(`${fire.coleccion[num]}/${uid}`).delete();
+         console.log(`documento eliminado`);
      }   
 
      catch(err) { 

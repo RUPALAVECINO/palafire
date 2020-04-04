@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "tsc",
-    "auto": "nano package.json && git add . && git commit -m \"automatico\" && git push origin master && npm publish "
+    "auto": "nano package.json && git add . && git commit -m \"automatico\" && git push origin master && npm publish --access=public"
   },
   "author": "Paladev",
   "keywords": [

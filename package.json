@@ -1,6 +1,6 @@
 {
-  "name": "palafire",
-  "version": "0.3.4",
+  "name": "@pala/fire",
+  "version": "0.3.6",
   "description": "npm package para facilitar firebase firestore y crear aplicaciones más rapidamente",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,5 +16,14 @@
   "license": "ISC",
   "dependencies": {
     "firebase-admin": "^8.9.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RUPALAVECINO/PalaFire.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RUPALAVECINO/PalaFire/issues"
+  },
+  "homepage": "https://github.com/RUPALAVECINO/PalaFire#readme"
 }

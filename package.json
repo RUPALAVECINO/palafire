@@ -1,6 +1,6 @@
 {
   "name": "@pala/fire",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "npm package para facilitar firebase firestore y crear aplicaciones más rapidamente",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "prepublish": "tsc",
     "auto": "nano package.json && git add . && git commit -m \"automatico\" && git push origin master && npm publish --access=public"
   },
-  "author": "Paladev",
+  "author": "Pala",
   "keywords": [
     "firebase",
     "firestore"

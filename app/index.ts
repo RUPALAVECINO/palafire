@@ -123,33 +123,31 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
      }
  }
 
- const actualizarSubDocumento = async(num:number,documento:string,num2:number,subdocumento:string,actualizar:any):Promise<void> => { 
+ const updateSubDoc = async(num:number,documento:string,num2:number,subdocumento:string,actualizar:any):Promise<any> => { 
      try{
-         await firestore()
+         const msg = await firestore()
          .collection(`${fire.coleccion[num]}`)
          .doc(`${documento}`)
          .collection(`${ fire.subcoleccion[num2] }`)
          .doc(`${subdocumento}`)
-         .update(actualizar);
-         console.log('subdocumento - actualizado!')
+         .update(actualizar)
+         return msg;
      } catch(err) {
          console.error(err)
      }
  }
 
  const eliminarDocumento = async (num:number,uid:string) => {
-     try {
+    try {
         let eliminado = await firestore().doc(`${fire.coleccion[num]}/${uid}`).delete();
-         console.log(`documento eliminado`);
-     }   
-
-     catch(err) { 
-         console.error(err)
-     }
+        return eliminado
+    }   
+    catch(err) { 
+        console.error(err)
+    }
  }
 
-
-      /* AUMENTA ME GUSTA DE UN PROYECTO */
+    /* AUMENTA ME GUSTA DE UN PROYECTO */
   const meGustaIncrementar = async  (num:number,uid_proyecto:string,user_uid:string) => {
          try{
         
@@ -196,7 +194,7 @@ export {
     meGustaIncrementar, 
     noMeGustaDecrementar, 
     actualizarDocumento,
-    actualizarSubDocumento, 
+    updateSubDoc, 
     addDoc, 
     addSubDoc, 
     addSubDocSet,

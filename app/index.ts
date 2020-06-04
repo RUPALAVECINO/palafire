@@ -136,7 +136,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
              return msg;
         } else {
             console.log(`No such document: ${documento}`);
-            return;
+            return 'does not exist';
         }
      } catch(err) {
         console.error(err)

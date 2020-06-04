@@ -135,7 +135,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
              .update(actualizar)
              return msg;
         } else {
-            console.log(`user not exist: ${documento}`);
+            console.log(`No such document: ${documento}`);
             return;
         }
      } catch(err) {

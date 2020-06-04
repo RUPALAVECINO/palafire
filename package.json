@@ -1,6 +1,6 @@
 {
   "name": "@pala/fire",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "npm package para facilitar firebase firestore y crear aplicaciones más rapidamente",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

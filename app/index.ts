@@ -37,8 +37,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
     }
 };
 
- /*      OBTENER UNA fire.coleccion   */
- const obtenerDatosSubcole = async(num:number,documento:string,num2:number):Promise<any> => {
+ const getSubDoc = async(num:number,documento:string,num2:number):Promise<any> => {
      try{
          let datos_cole:[][] = []
          let collection = await firestore()
@@ -207,7 +206,7 @@ export {
     addDocSet, 
     eliminarDocumento, 
     getDoc, 
-    obtenerDatosSubcole, 
+    getSubDoc, 
     tokenClient,
     removeArray,
     unionArray,

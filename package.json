@@ -1,6 +1,6 @@
 {
   "name": "@pala/fire",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "npm package para facilitar firebase firestore y crear aplicaciones más rapidamente",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "firebase-admin": "^8.9.2"
+    "firebase-admin": "^8.12.1"
   },
   "devDependencies": {},
   "repository": {

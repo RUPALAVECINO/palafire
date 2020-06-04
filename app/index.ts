@@ -125,15 +125,21 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
 
  const updateSubDoc = async(num:number,documento:string,num2:number,subdocumento:string,actualizar:any):Promise<any> => { 
      try{
-         const msg = await firestore()
-         .collection(`${fire.coleccion[num]}`)
-         .doc(`${documento}`)
-         .collection(`${ fire.subcoleccion[num2] }`)
-         .doc(`${subdocumento}`)
-         .update(actualizar)
-         return msg;
+         let doc = firestore().collection(`${fire.coleccion[num]}`).doc(`${documento}`);
+         if((await doc.get()).exists) {
+             const msg = await firestore()
+             .collection(`${fire.coleccion[num]}`)
+             .doc(`${documento}`)
+             .collection(`${ fire.subcoleccion[num2] }`)
+             .doc(`${subdocumento}`)
+             .update(actualizar)
+             return msg;
+        } else {
+            console.log(`user not exist: ${documento}`);
+            return;
+        }
      } catch(err) {
-         console.error(err)
+        console.error(err)
      }
  }
 

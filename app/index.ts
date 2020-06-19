@@ -110,7 +110,7 @@ const getDoc = async(num:number,documento:string):Promise<any>=> {
  }
 
 
- const actualizarDocumento = async(num:number,documento:string,actualizar:any):Promise<any> => { 
+ const updateDoc = async(num:number,documento:string,actualizar:any):Promise<any> => { 
      try{
          await firestore()
          .collection(`${fire.coleccion[num]}`)
@@ -198,7 +198,7 @@ export {
     getDb, 
     meGustaIncrementar, 
     noMeGustaDecrementar, 
-    actualizarDocumento,
+    updateDoc,
     updateSubDoc, 
     addDoc, 
     addSubDoc, 
